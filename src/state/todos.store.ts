@@ -1,7 +1,7 @@
 import { Draft, createDraft } from 'immer';
 import { v4 as uuid } from 'uuid';
 import { writable, derived } from 'svelte/store';
-import { createAction, createApi } from './utils';
+import { createApi } from './utils';
 
 // 1️⃣ Declare types 
 // --------------------------------------------------------
