@@ -11,8 +11,9 @@
 		}),
 	};
 
-	async function handleSubmit ({ todo }) {
-		todosAPI.addTodo(todo); 
+	async function handleSubmit ({detail: { values, resetForm }}) {
+		todosAPI.addTodo(values.todo); 
+		resetForm();
 	}
 
 	$: all = $todos;
@@ -20,26 +21,8 @@
 	$: done = $doneTodos;
 </script>
 
-<style lang="postcss" global>
-	@tailwind base;
-	@tailwind components;
-	@tailwind utilities;
-
-	html, body {
-		font-size: 20px;
-	}
-
-	label, input  {
-		display: block;
-	}
-
-	label {
-		@apply font-bold;
-	}
-
-	input[type="text"] {
-		@apply rounded px-2 py-1 text-black w-full;
-	}
+<style lang="postcss">
+	
 </style>
 
 <div class="h-screen p-8 bg-gray-100 app">

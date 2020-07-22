@@ -1,12 +1,16 @@
-import svelte from 'rollup-plugin-svelte';
+import svelte from 'rollup-plugin-svelte-hot';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
+import postcss from 'rollup-plugin-postcss';
+import inject from 'rollup-plugin-inject-process-env';
 
-const production = !process.env.ROLLUP_WATCH;
+const { ROLLUP_WATCH } = process.env;
+const production = !ROLLUP_WATCH;
+const nodeEnv = production ? 'production' : 'development';
 
 export default {
 	input: 'src/main.ts',
@@ -17,7 +21,14 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		inject({
+			NODE_ENV: nodeEnv
+		}, {
+			include: './src/main.ts',
+        }),
+
 		svelte({
+			hot: !production,
 			// enable run-time checks when not in production
 			dev: !production,
 			// we'll extract any component CSS out into
@@ -41,7 +52,10 @@ export default {
 		}),
 		commonjs(),
 		typescript({ sourceMap: !production }),
-
+		postcss({
+			extract: true,
+			extensions: ['.css', '.scss', '.sass']
+		}),
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
 		!production && serve(),

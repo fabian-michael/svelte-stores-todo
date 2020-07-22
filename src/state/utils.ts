@@ -1,4 +1,4 @@
-import { Draft, produce } from 'immer/dist/immer.cjs.production.min';
+import { Draft, produce } from 'immer';
 import { Writable } from 'svelte/store';
 
 type Action<Payload> = (payload: Payload) => void;

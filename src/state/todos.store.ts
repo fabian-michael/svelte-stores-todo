@@ -1,4 +1,4 @@
-import { Draft } from 'immer';
+import { Draft, castDraft, createDraft } from 'immer';
 import { v4 as uuid } from 'uuid';
 import { writable, derived } from 'svelte/store';
 import { createAction, createApi } from './utils';
@@ -41,24 +41,27 @@ const addTodo = (state: DraftState, title: string) => {
 }
 
 /** Sets the done status by id */
-export const setDone = (state: DraftState, {id, done}: { id: string, done: boolean }) => {
+const setDone = (state: DraftState, {id, done}: { id: string, done: boolean }) => {
     const todo = state.find(todo => todo.id === id);
     if (todo) todo.done = done;
 };
 
 /** Toggles the done status by id */
-export const toggleDone = (state: DraftState, id: string) => {
+const toggleDone = (state: DraftState, id: string) => {
     const todo = state.find(todo => todo.id === id);
     if (todo) todo.done = !todo.done;
 };
 
 /** Reset store to initalState */
-const reset = () => store.set(initialState);
+const reset = (state: DraftState) => {
+    return createDraft(initialState);
+};
 
 export const todosAPI = createApi(store, {
     addTodo,
     setDone,
-    toggleDone
+    toggleDone,
+    reset
 });
 
 export default todosAPI;
