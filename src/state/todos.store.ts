@@ -62,5 +62,3 @@ export const todosAPI = createApi(store, {
     toggleDone,
     reset
 });
-
-export default todosAPI;
