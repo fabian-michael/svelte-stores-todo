@@ -6,12 +6,11 @@ import { createApi } from './utils';
 // 1️⃣ Declare types 
 // --------------------------------------------------------
 
-export interface Todo {
+export type Todo = {
     id: string,
     title: string;
     done: boolean;
 }
-
 type State = Todo[];
 type DraftState = Draft<State>;
 

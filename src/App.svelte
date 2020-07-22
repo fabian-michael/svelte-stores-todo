@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
 	import { todos, openTodos, doneTodos, todosAPI } from "./state/todos.store";
 	import { Form, Input } from "sveltejs-forms";
 	import { Tabs, Tab, TabList, TabPanel } from "svelte-tabs";
 	import * as yup from "yup";
-	import TodoItem from "./components/TodoItem.svelte";
+	import { TodoList } from "./components";
 
 	const formProps = {
 		schema: yup.object().shape({
@@ -15,7 +15,7 @@
 		todosAPI.addTodo(values.todo); 
 		resetForm();
 	}
-
+ 
 	$: all = $todos;
 	$: open = $openTodos;
 	$: done = $doneTodos;
@@ -56,29 +56,17 @@
 
 			<TabPanel>
 				<h2>All Todos</h2>
-				<ul>
-					{#each all as todo}
-						<TodoItem {todo} />
-					{/each}
-				</ul>
+				<TodoList todos={all} />
 			</TabPanel>
 
 			<TabPanel>
 				<h2>Open Todos</h2>
-				<ul>
-					{#each open as todo}
-						<TodoItem {todo} />
-					{/each}
-				</ul>
+				<TodoList todos={open} />
 			</TabPanel>
 
 			<TabPanel>
 				<h2>Done Todos</h2>
-				<ul>
-					{#each done as todo}
-						<TodoItem {todo} />
-					{/each}
-				</ul>
+				<TodoList todos={done} />
 			</TabPanel>
 		</Tabs>
 	</div>
