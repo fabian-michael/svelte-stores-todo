@@ -66,13 +66,13 @@
 
 		<Tabs>
 			<TabList>
-				<Tab>One</Tab>
-				<Tab>Two</Tab>
-				<Tab>Three</Tab>
+				<Tab>All</Tab>
+				<Tab>Open</Tab>
+				<Tab>Done</Tab>
 			</TabList>
 
 			<TabPanel>
-				<h2>Panel One</h2>
+				<h2>All Todos</h2>
 				<ul>
 					{#each all as todo}
 						<TodoItem {todo} />
@@ -81,7 +81,7 @@
 			</TabPanel>
 
 			<TabPanel>
-				<h2>Panel Two</h2>
+				<h2>Open Todos</h2>
 				<ul>
 					{#each open as todo}
 						<TodoItem {todo} />
@@ -90,7 +90,7 @@
 			</TabPanel>
 
 			<TabPanel>
-				<h2>Panel Three</h2>
+				<h2>Done Todos</h2>
 				<ul>
 					{#each done as todo}
 						<TodoItem {todo} />
