@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { todos, openTodos, doneTodos, todosAPI } from "./state/todos.store";
+	import { Todo, todos, openTodos, doneTodos, todosAPI } from "./state/todos.store";
 	import { Form, Input } from "sveltejs-forms";
 	import { Tabs, Tab, TabList, TabPanel } from "svelte-tabs";
 	import * as yup from "yup";
@@ -11,11 +11,15 @@
 		}),
 	};
 
-	async function handleSubmit ({detail: { values, resetForm }}) {
+	function handleSubmit ({detail: { values, resetForm }}: CustomEvent) {
 		todosAPI.addTodo(values.todo); 
 		resetForm();
 	}
  
+	let all: Todo[];
+	let open: Todo[];
+	let done: Todo[];
+
 	$: all = $todos;
 	$: open = $openTodos;
 	$: done = $doneTodos;
@@ -39,7 +43,7 @@
 						<button
 							type="button"
 							class="px-2 py-1 ml-4 bg-red-500 rounded"
-							on:click={todosAPI.reset}>
+							on:click={() => todosAPI.reset()}>
 							Reset
 						</button>
 					</div>

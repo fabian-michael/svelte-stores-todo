@@ -1,9 +1,9 @@
 <svelte:options immutable={true} />
 
-<script>
-    import {todosAPI} from '../state/todos.store';
+<script lang="ts">
+    import {todosAPI, Todo} from '../state/todos.store';
 
-    export let todo;
+    export let todo: Todo;
 
     function handleToggle() {
         todosAPI.toggleDone(todo.id);

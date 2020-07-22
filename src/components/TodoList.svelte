@@ -1,7 +1,8 @@
-<script>
+<script lang="ts">
     import TodoItem from "./TodoItem.svelte";
+    import {Todo} from '../state/todos.store';
 
-    export let todos;
+    export let todos: Todo[];
 </script>
 
 <ul>
