@@ -53,7 +53,7 @@ const toggleDone = (state: DraftState, id: string) => {
 };
 
 /** Reset store to initalState */
-const reset = (state: DraftState) => {
+const reset = () => {
     return createDraft(initialState);
 };
 
