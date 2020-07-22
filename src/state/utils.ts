@@ -22,7 +22,9 @@ export const createApi = <
 		[name: string]: ActionCallback<any, any>
 	},
 	Api extends {
-		[K in keyof ActionCallbacks]: ActionCallbacks[K] extends ActionCallback<State, infer Payload>
+		[K in keyof ActionCallbacks]: ActionCallbacks[K] extends ActionCallback<State, void>
+		? Action<void>
+		: ActionCallbacks[K] extends ActionCallback<State, infer Payload>
 		? Action<Payload>
 		: never
 	}
