@@ -1,19 +1,19 @@
 @tailwind base;
-	@tailwind components;
-	@tailwind utilities;
+@tailwind components;
+@tailwind utilities;
 
-	html, body {
-		font-size: 20px;
-	}
+html, body {
+	font-size: 20px;
+}
 
-	label, input  {
-		display: block;
-	}
+label, input  {
+	display: block;
+}
 
-	label {
-		@apply font-bold;
-	}
+label {
+	@apply font-bold;
+}
 
-	input[type="text"] {
-		@apply rounded px-2 py-1 text-black w-full;
-	}
+input[type="text"] {
+	@apply rounded px-2 py-1 text-black w-full;
+}
