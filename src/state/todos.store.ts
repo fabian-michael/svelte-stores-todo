@@ -1,7 +1,7 @@
 import { Draft, createDraft } from 'immer';
 import { v4 as uuid } from 'uuid';
 import { writable, derived } from 'svelte/store';
-import { createApi } from './utils';
+import { createApi, ActionCallback } from './utils';
 
 // 1️⃣ Declare types 
 // --------------------------------------------------------
@@ -11,13 +11,13 @@ export type Todo = {
     title: string;
     done: boolean;
 }
-type State = Todo[];
-type DraftState = Draft<State>;
+type TodoState = Todo[];
+type TodoAction<Payload> = ActionCallback<TodoState, Payload>
 
 // 2️⃣ Create store 
 // --------------------------------------------------------
 
-const initialState: State = [];
+const initialState: TodoState = [];
 const store = writable(initialState);
 
 // 3️⃣ Create views (derived stores)
@@ -31,7 +31,7 @@ export const openTodos = derived(store, (todos) => todos.filter(todo => !todo.do
 // --------------------------------------------------------
 
 /** Creates and adds a new todo item */
-const addTodo = (state: DraftState, title: string) => {
+const addTodo: ActionCallback<TodoState, string> = (state, title) => {
     state.push({
         id: uuid(),
         title,
@@ -40,19 +40,19 @@ const addTodo = (state: DraftState, title: string) => {
 }
 
 /** Sets the done status by id */
-const setDone = (state: DraftState, {id, done}: { id: string, done: boolean }) => {
+const setDone: TodoAction<{ id: string, done: boolean }> = (state, {id, done}) => {
     const todo = state.find(todo => todo.id === id);
     if (todo) todo.done = done;
 };
 
 /** Toggles the done status by id */
-const toggleDone = (state: DraftState, id: string) => {
+const toggleDone: TodoAction<string> = (state, id) => {
     const todo = state.find(todo => todo.id === id);
     if (todo) todo.done = !todo.done;
 };
 
 /** Reset store to initalState */
-const reset = () => {
+const reset: TodoAction<void> = () => {
     return createDraft(initialState);
 };
 

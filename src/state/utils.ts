@@ -1,8 +1,8 @@
 import { Draft, produce } from 'immer';
 import { Writable } from 'svelte/store';
 
-type Action<Payload> = (payload: Payload) => void;
-type ActionCallback<State, Payload> = (state: Draft<State>, payload: Payload) => void;
+export type Action<Payload> = (payload: Payload) => void;
+export type ActionCallback<State, Payload> = (state: Draft<State>, payload: Payload) => void;
 type StateTypeOf<Store> = Store extends Writable<infer State> ? State : never;
 
 export const createAction = <
