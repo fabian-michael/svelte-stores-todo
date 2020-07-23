@@ -12,7 +12,7 @@ export type Todo = {
     done: boolean;
 }
 type TodoState = Todo[];
-type TodoAction<Payload> = ActionCallback<TodoState, Payload>
+type TodoAction<Payload=void> = ActionCallback<TodoState, Payload>
 
 // 2️⃣ Create store 
 // --------------------------------------------------------
@@ -52,7 +52,7 @@ const toggleDone: TodoAction<string> = (state, id) => {
 };
 
 /** Reset store to initalState */
-const reset: TodoAction<void> = () => {
+const reset: TodoAction = () => {
     return createDraft(initialState);
 };
 

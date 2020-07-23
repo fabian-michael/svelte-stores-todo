@@ -2,7 +2,7 @@ import { Draft, produce } from 'immer';
 import { Writable } from 'svelte/store';
 
 export type Action<Payload> = (payload: Payload) => void;
-export type ActionCallback<State, Payload> = (state: Draft<State>, payload: Payload) => void;
+export type ActionCallback<State, Payload=void> = (state: Draft<State>, payload?: Payload) => void;
 type StateTypeOf<Store> = Store extends Writable<infer State> ? State : never;
 
 export const createAction = <
@@ -19,7 +19,7 @@ export const createApi = <
 	Store extends Writable<any>,
 	State extends StateTypeOf<Store>,
 	ActionCallbacks extends {
-		[name: string]: ActionCallback<any, any>
+		[name: string]: ActionCallback<State, any>
 	},
 	Api extends {
 		[K in keyof ActionCallbacks]: ActionCallbacks[K] extends ActionCallback<State, void>
