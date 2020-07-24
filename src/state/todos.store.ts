@@ -1,4 +1,4 @@
-import { Draft, createDraft } from 'immer';
+import { createDraft } from 'immer';
 import { v4 as uuid } from 'uuid';
 import { writable, derived } from 'svelte/store';
 import { createApi, ActionCallback } from './utils';
