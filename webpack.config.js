@@ -18,6 +18,7 @@ module.exports = {
 	},
 	output: {
 		path: __dirname + '/public',
+		publicPath: '/build',
 		filename: '[name].js',
 		chunkFilename: '[name].[id].js'
 	},
