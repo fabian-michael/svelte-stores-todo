@@ -31,12 +31,17 @@ export const openTodos = derived(store, (todos) => todos.filter(todo => !todo.do
 // --------------------------------------------------------
 
 /** Creates and adds a new todo item */
-const addTodo: ActionCallback<TodoState, string> = (state, title) => {
+const addTodo: TodoAction<string> = (state, title) => {
     state.push({
         id: uuid(),
         title,
         done: false
     })
+}
+
+/** Removes a todo by id */
+const removeTodo: TodoAction<string> = (state, id) => {
+    return state.filter(todo => todo.id !== id);
 }
 
 /** Sets the done status by id */
@@ -56,8 +61,9 @@ const reset: TodoAction = () => {
     return createDraft(initialState);
 };
 
-export const todosAPI = createApi(store, {
+export const todosApi = createApi(store, {
     addTodo,
+    removeTodo,
     setDone,
     toggleDone,
     reset
