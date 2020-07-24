@@ -35,6 +35,7 @@
   "dependencies": {
     "immer": "^7.0.5",
     "sirv-cli": "^1.0.3",
+    "svelte-feather-icons": "^3.2.2",
     "svelte-tabs": "^1.1.0",
     "sveltejs-forms": "^2.0.1",
     "uuid": "^8.2.0",
