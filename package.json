@@ -33,7 +33,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "immer": "^7.0.5",
+    "immer": "^9.0.6",
     "sirv-cli": "^1.0.3",
     "svelte-feather-icons": "^3.2.2",
     "svelte-tabs": "^1.1.0",
